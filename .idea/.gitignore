@@ -9,5 +9,5 @@
 # Editor-based HTTP Client requests
 /httpRequests/
 .class
-.idea
+/.idea
 .xml
