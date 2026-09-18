@@ -1,0 +1,68 @@
+@startuml
++ class Etudiant {
+- Identite identite
+- Formation formation
+- HashMap<String, ArrayList<Double>> resultats
++ Etudiant(Identite id, Formation f)
++ ajoutNote(String matiere, double note) : void
++ calculerMoyenne(String matiere) : float
++ calculerMoyenneGenerale() : float
++ equals(Object o) : boolean
++ hashCode() : int
+
+
+
+}
++ class Formation{
+- int identifiant
+- HashMap<String, float> matieres
++ Formation(int id)
++ ajoutMatiere(String matiere, float coef) : void
++ supprimerMatiere(String matiere) : void
++ getIdentifiant() : int
++ getCoef(String matiere) : float
++ equals(Object o) : boolean
++ hashCode() : int
+}
+
++ class Groupe{
+- HashSet<Etudiant> liste
+- Formation formation
++ Groupe(Formation f)
++ getListe() : HashSet<Etudiant>
++ getFormation() : Formation
++ equals(Object o) : boolean
++ hashCode() : int
++ triAlpha() : void
++ triAntiAlpha() : void
++ triParMerite() : void
+
+}
++ class Identite{
+- String  nip, nom, prenom
++ Identite(String id, String n, String p)
++ getNIP() : String
++ getNom() : String
++ getPrenom() : String
+}
++ class Alpha implements Comparator{
++ Alpha()
++ compareTo(Object o) : int
+}
++ class AntiAlpha implements Comparator{
++ AntiAlpha()
++ compareTo(Object o) : int
+}
++ class Merite implements Comparator{
++ Merite()
++ compareTo(Object o) : int
+}
+
+Etudiant "*"<-up-"1" Groupe : HashSet<Etudiant> liste
+Etudiant "1"-->"1" Formation : Formation formation
+Etudiant "1"-->"1" Identite : Identite identite
+Merite --> Groupe
+Alpha --> Groupe
+
+
+@enduml
