@@ -21,7 +21,7 @@ public class Formation {
         return this.identifiant;
     }
 
-    public Double getCoef(String matiere){
+    public Double getCoeff(String matiere){
         if(!this.matieres.containsKey(matiere)){
             //que faire si la matière n’est pas dans la
             //collection attribut de la formation ?
