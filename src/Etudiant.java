@@ -19,12 +19,25 @@ public class Etudiant {
         this.resultat.get(matiere).add(note);
     }
 
-    public double calculerMoyenne(String matiere){
-        if (!this.resultat.containsKey(matiere)) return 0;
+    public ArrayList<Double> getResultat(String matiere) throws MatiereException{
+        if(!resultat.containsKey(matiere)){
+            throw new MatiereException("La matiere n'existe pas dans la " +
+                    "formation de l'étudiant.");
+        }
+        return resultat.get(matiere);
+
+    }
+
+    public double calculerMoyenne(String matiere) throws MatiereException {
+        if (!this.resultat.containsKey(matiere)){
+            throw new MatiereException("La matiere n'existe pas dans la formation de" +
+                    "l'etudiant.");
+        };
         double moyenne = 0;
         for (double note : this.resultat.get(matiere)){
             moyenne += note;
         }
+        if(this.getResultat(matiere).isEmpty()) return 0.0;
         return moyenne / this.resultat.get(matiere).size();
     }
 
@@ -32,10 +45,14 @@ public class Etudiant {
         double mg = 0;
         double mm = 0;
         int cpte = 0;
+
         for (String m : this.resultat.keySet()){
             mm = calculerMoyenne(m);
             mg += mm * this.formation.getCoeff(m);
             cpte += this.formation.getCoeff(m);
+        }
+        if(cpte == 0){
+            return 0.0;
         }
         return mg/cpte;
     }

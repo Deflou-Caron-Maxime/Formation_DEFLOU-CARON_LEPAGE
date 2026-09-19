@@ -6,7 +6,9 @@ public class Formation {
     private HashMap<String, Double> matieres;
 
     public Formation(int idd){
+
         this.identifiant = idd;
+        matieres = new HashMap<>();
     }
     public void ajoutMatiere(String matiere, Double coef){
         this.matieres.put(matiere, coef);
@@ -26,7 +28,7 @@ public class Formation {
             //que faire si la matière n’est pas dans la
             //collection attribut de la formation ?
             //Lever une exception
-            throw new Matiere("La matière n'existe pas dans la formation," +
+            throw new MatiereException("La matière n'existe pas dans la formation," +
                     "veuillez l'ajouter d'abord.");
         }
         return this.matieres.get(matiere);
