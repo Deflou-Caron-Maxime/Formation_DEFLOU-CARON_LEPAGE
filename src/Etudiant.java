@@ -56,4 +56,8 @@ public class Etudiant {
         }
         return mg/cpte;
     }
+
+    public Formation getFormation() {
+        return formation;
+    }
 }
