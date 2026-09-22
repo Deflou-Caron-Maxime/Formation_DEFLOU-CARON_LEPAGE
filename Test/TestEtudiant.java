@@ -14,11 +14,11 @@ public class TestEtudiant {
     public Etudiant etu1 = new Etudiant(identite, formation);
     public Etudiant etu2 = new Etudiant(idd2, formation2);
 
-    String Qdev = "Qdev";
-    String Algo = "Algo";
-    String Reseaux = "Reseaux";
-    String Cryptographie = "Cryptographie";
-    String Anglais = "Anglais";
+    String qdev = "Qdev";
+    String algo = "Algo";
+    String reseaux = "Reseaux";
+    String cryptographie = "Cryptographie";
+    String anglais = "Anglais";
 
     @BeforeEach
     public void setUp(){
@@ -29,29 +29,29 @@ public class TestEtudiant {
 
 
 
-        etu1.ajoutNote(Qdev, 11.0);
-        etu1.ajoutNote(Qdev, 17.0);
-        etu1.ajoutNote(Algo, 15.0);
-        etu1.ajoutNote(Algo, 18.0);
-        etu1.ajoutNote(Reseaux, 13.0);
-        etu1.ajoutNote(Reseaux, 16.0);
+        etu1.ajoutNote(qdev, 11.0);
+        etu1.ajoutNote(qdev, 17.0);
+        etu1.ajoutNote(algo, 15.0);
+        etu1.ajoutNote(algo, 18.0);
+        etu1.ajoutNote(reseaux, 13.0);
+        etu1.ajoutNote(reseaux, 16.0);
     }
 
     @Test
     public void testAjoutNote(){
-        etu1.ajoutNote(Cryptographie, 16.0);
-        assertEquals(16.0, etu1.getResultat(Cryptographie).getFirst());
+        etu1.ajoutNote(cryptographie, 16.0);
+        assertEquals(16.0, etu1.getResultat(cryptographie).getFirst());
     }
 
     @Test
     public void testAjoutNoteMatiereInexistante(){
-        etu1.ajoutNote(Anglais, 20.0);
-        assertEquals(20.0, etu1.getResultat(Anglais).getFirst());
+        etu1.ajoutNote(anglais, 20.0);
+        assertEquals(20.0, etu1.getResultat(anglais).getFirst());
     }
 
     @Test
     public void testGetResultat(){
-        System.out.println(etu1.getResultat(Qdev));
+        System.out.println(etu1.getResultat(qdev));
     }
 
     @Test
@@ -63,7 +63,7 @@ public class TestEtudiant {
 
     @Test
     public void testCalculerMoyenne(){
-        assertEquals(14, etu1.calculerMoyenne(Qdev));
+        assertEquals(14, etu1.calculerMoyenne(qdev));
     }
 
     @Test
