@@ -1,5 +1,7 @@
+import java.text.Normalizer;
 import java.util.HashMap;
 import java.util.Objects;
+import java.util.Set;
 
 public class Formation {
     private int identifiant;
@@ -8,7 +10,7 @@ public class Formation {
     public Formation(int idd){
 
         this.identifiant = idd;
-        matieres = new HashMap<>();
+        this.matieres = new HashMap<>();
     }
     public void ajoutMatiere(String matiere, Double coef){
         this.matieres.put(matiere, coef);
@@ -34,6 +36,13 @@ public class Formation {
         return this.matieres.get(matiere);
     }
 
+    public Set<String> getMatieres(){
+        return this.matieres.keySet();
+    }
+    public HashMap<String, Double> getMatiere(){
+        return this.matieres;
+    }
+
 
     @Override
     public boolean equals(Object obj) {
@@ -44,13 +53,13 @@ public class Formation {
             return false;
         }
 
-        return((this.identifiant == ((Formation)obj).identifiant)
-                && (this.matieres == ((Formation)obj).matieres));
+        return((this.identifiant == ((Formation)obj).getIdentifiant()) &&
+                (this.matieres.equals(((Formation)obj).getMatiere())));
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(identifiant, matieres);
+        return Objects.hash(this.identifiant, this.matieres);
     }
 
 
