@@ -82,3 +82,4 @@ public class TestEtudiant {
     public void testCalculerMoyennerGeneraleEtudiantVide(){
         assertEquals(0, etu2.calculerMoyenneGenerale());
     }
+}
