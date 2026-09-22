@@ -31,7 +31,7 @@ public class Etudiant {
     public double calculerMoyenne(String matiere) throws MatiereException {
         if (!this.resultat.containsKey(matiere)){
             throw new MatiereException("La matiere n'existe pas dans la formation de" +
-                    "l'etudiant.");
+                    " l'etudiant.");
         };
         double moyenne = 0;
         for (double note : this.resultat.get(matiere)){
