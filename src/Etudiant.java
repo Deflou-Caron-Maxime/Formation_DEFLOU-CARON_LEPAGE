@@ -37,13 +37,15 @@ public class Etudiant {
 
     public double calculerMoyenne(String matiere) throws MatiereException {
         if (!this.resultat.containsKey(matiere)){
-            return 0.0;
+            // Resultat d'erreur
+            return -1;
         };
         double moyenne = 0;
         for (double note : this.resultat.get(matiere)){
             moyenne += note;
         }
-        if(this.getResultat(matiere).isEmpty()) return 0.0;
+        // resultat d'erreur
+        if(this.getResultat(matiere).isEmpty()) return -1;
         return moyenne / this.resultat.get(matiere).size();
     }
 
@@ -53,15 +55,11 @@ public class Etudiant {
         int cpte = 0;
 
         for (String m : this.resultat.keySet()){
-            if (!(getResultat(m) == null)) {
-                mm = calculerMoyenne(m);
+            mm = calculerMoyenne(m);
+            if (mm != -1) {
                 mg += mm * this.formation.getCoeff(m);
                 cpte += this.formation.getCoeff(m);
             }
-
-
-
-
         }
         if(cpte == 0){
             return 0.0;
