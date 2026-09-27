@@ -1,21 +1,23 @@
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashSet;
 
 public class Groupe {
-    private HashSet<Etudiant> liste;
+    private ArrayList<Etudiant> liste;
     private Formation formation;
 
 
     public Groupe(Formation f){
         this.formation = f;
-        this.liste = new HashSet<>();
+        this.liste = new ArrayList<>();
     }
 
     public Formation getFormation() {
         return formation;
     }
 
-    public HashSet<Etudiant> getListe() {
-        return liste;
+    public ArrayList<Etudiant> getListe() {
+        return this.liste;
     }
 
     @Override
@@ -44,12 +46,16 @@ public class Groupe {
         return this.liste.contains(e);
     }
 
-    public void triAlpha(){
+    public int getIndexEtudiant(Etudiant e){
+        return this.liste.indexOf(e);
+    }
 
+    public void triAlpha(){
+        Collections.sort(this.liste, new TriAlpha());
     }
 
     public void triAntiAlpha(){
-
+        Collections.sort(this.liste, new TriAntiAlpha());
     }
 
     public void triMerite(){
