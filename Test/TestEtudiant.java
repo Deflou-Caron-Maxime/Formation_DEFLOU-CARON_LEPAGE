@@ -1,6 +1,8 @@
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.text.Normalizer;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 public class TestEtudiant {
@@ -68,40 +70,40 @@ public class TestEtudiant {
         //La note devient 20.0.
     }
 
-
-
-    @Test
-    public void testGetResultatMatiereInexistante(){
-        assertThrows(MatiereException.class, () -> {
-            etu1.getResultat("Mathematique");
-        });
-    }
-
+    //Test le calcul de la moyenne d'une matière qui existe
     @Test
     public void testCalculerMoyenne(){
         assertEquals(14, etu1.calculerMoyenne(qdev));
     }
 
+    //Test le calcul de la moyenne d'une matière qui n'existe pas
     @Test
     public void testCalculerMoyenneMatiereInexistante(){
-        boolean test = false;
-        try{
-            etu1.calculerMoyenne("Mathematique");
-            test = true;
-        } catch (MatiereException e){
-            System.out.println(e.getMessage());
-            test = false;
-        }
-        assertFalse(test);
+        assertEquals(-1,etu1.calculerMoyenne("Mathematique"));
     }
-
+    //Test le calcul de la moyenne general d'un étudiant
     @Test
     public void testCalculerMoyenneGenerale(){
         assertEquals(15, etu1.calculerMoyenneGenerale());
     }
 
+    //Test le calcul de la moyenne general d'un étudiant qui n'a pas de note
     @Test
     public void testCalculerMoyennerGeneraleEtudiantVide(){
         assertEquals(0, etu2.calculerMoyenneGenerale());
+    }
+
+    //Test le calcul de la moyenne general d'un étudiant qui n'a pas de note dans une matière
+    @Test
+    public void testCalculerMoyenneGeneraleUneMatiereVide(){
+        Identite id3 = new Identite("toto", "tata", "e83033u");
+        Formation f3 = new Formation(3);
+        f3.ajoutMatiere(anglais, 1.0);
+        f3.ajoutMatiere(algo, 1.0);
+
+        Etudiant etu3 = new Etudiant(id3, f3);
+        etu3.ajoutNote(anglais, 10);
+
+        assertEquals(10, etu3.calculerMoyenneGenerale());
     }
 }

@@ -20,7 +20,7 @@ public class Groupe {
 
     @Override
     public boolean equals(Object obj) {
-        return super.equals(obj);
+        return this.formation.equals((Formation) obj);
     }
 
     @Override
@@ -38,6 +38,10 @@ public class Groupe {
         if (this.liste.contains(e)){
             this.liste.remove(e);
         }
+    }
+
+    public boolean appartinirGroupe(Etudiant e){
+        return this.liste.contains(e);
     }
 
     public void triAlpha(){
