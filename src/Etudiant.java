@@ -14,7 +14,7 @@ public class Etudiant {
         this.formation = f;
         this.resultat = new HashMap<>();
         for (String s : this.formation.getMatieres()){
-            this.resultat.put(s, null);
+            this.resultat.put(s, new ArrayList<>());
         }
     }
 
