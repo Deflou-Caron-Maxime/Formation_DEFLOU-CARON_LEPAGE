@@ -20,8 +20,7 @@ public class Etudiant {
 
     public void ajoutNote(String matiere, double note){
         // Si la note renseignée est incorrect, on la corrige pour la mettre dans l'intervalle autorisee
-        if (note < 0) note = 0;
-        if (note > 20) note = 20;
+        if ((note < 0)||(note > 20)) throw new NoteException("La note saisie n'est pas comprise entre 0 et 20 !");
         if (!this.resultat.containsKey(matiere)) this.resultat.put(matiere, new ArrayList<>());
         this.resultat.get(matiere).add(note);
     }
