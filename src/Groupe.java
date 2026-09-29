@@ -44,6 +44,31 @@ public class Groupe {
         return this.liste.contains(e);
     }
 
+
+    public double calculerMoyenneMatiere(String matiere) {
+        double moy = 0;
+        double me;
+        int nbe = 0;
+        for (Etudiant e : this.liste) {
+            me = e.calculerMoyenne(matiere);
+            if (me != -1) {
+                moy += me;
+                nbe++;
+            }
+
+        }
+        return (nbe != 0) ? (moy / nbe) : -1;
+    }
+
+    public double calculerMoyenneGenerale(){
+        double moy = 0;
+        for (Etudiant e : this.liste) {
+            moy += e.calculerMoyenneGenerale();
+        }
+        return (this.liste.size() != 0) ? (moy / this.liste.size()) : 0;
+
+    }
+
     public void triAlpha(){
 
     }
