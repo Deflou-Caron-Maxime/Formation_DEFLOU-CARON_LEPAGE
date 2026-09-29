@@ -57,17 +57,30 @@ public class TestEtudiant {
     //Test l'ajout d'une note négative.
     @Test
     public void testAjoutNoteNegative(){
-        etu1.ajoutNote(anglais, -2);
-        assertEquals(0.0, etu1.getResultat(anglais).getFirst());
+        boolean ex = false;
+        try{
+            etu1.ajoutNote(anglais, -2);
+
+        }catch (NoteException e){
+            System.out.println(e.getMessage());
+            ex = true;
+        }
+        assertTrue(ex);
         //La note devient 0.0.
     }
 
     //Test l'ajout d'une note supérieur à 20.
     @Test
     public void testAjoutNoteSupVingt(){
-        etu1.ajoutNote(anglais, 22);
-        assertEquals(20.0, etu1.getResultat(anglais).getFirst());
-        //La note devient 20.0.
+        boolean ex = false;
+        try{
+            etu1.ajoutNote(anglais, 22);
+        }
+        catch (NoteException e){
+            System.out.println(e.getMessage());
+            ex = true;
+        }
+        assertTrue(ex);
     }
 
     //Test le calcul de la moyenne d'une matière qui existe
