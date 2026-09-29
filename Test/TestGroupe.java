@@ -1,8 +1,7 @@
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class TestGroupe {
     Identite idd = new Identite("ar", "RENNES", "Arthur");
@@ -19,8 +18,16 @@ public class TestGroupe {
     @BeforeEach
     public void setUp(){
         formation.ajoutMatiere("web", 1.0);
-        formation.ajoutMatiere("reseau", 1.0);
-        formation.ajoutMatiere("algo", 1.0);
+        formation.ajoutMatiere("reseau", 2.0);
+        formation.ajoutMatiere("algo", 0.5);
+
+        e.ajoutNote("reseau", 10);
+        e.ajoutNote("algo", 20);
+
+        e1.ajoutNote("reseau", 13);
+
+        e2.ajoutNote("reseau", 6);
+        e2.ajoutNote("algo", 5.5);
     }
 
 
@@ -55,5 +62,54 @@ public class TestGroupe {
 
         assertTrue(groupe.appartinirGroupe(e));
         assertFalse(groupe.appartinirGroupe(e1));
+    }
+
+    @Test
+    public void testMoyenneMatiereExistante(){
+        groupe.ajouterEtudiant(e);
+        groupe.ajouterEtudiant(e1);
+        groupe.ajouterEtudiant(e2);
+
+        double mm = groupe.calculerMoyenneMatiere("reseau");
+
+        double moy = e.calculerMoyenne("reseau");
+        moy += e1.calculerMoyenne("reseau");
+        moy += e2.calculerMoyenne("reseau");
+        assertEquals(moy/3, mm);
+    }
+
+    @Test
+    public void testMoyenneMatiereInexistanteTous(){
+        groupe.ajouterEtudiant(e);
+        groupe.ajouterEtudiant(e1);
+        groupe.ajouterEtudiant(e2);
+
+        double mm = groupe.calculerMoyenneMatiere("web");
+        // Le code d'erreur associé à une matière inexistante est -1
+        assertEquals(-1, mm);
+    }
+
+    @Test
+    public void testMoyenneMatiereInexistanteUn(){
+        groupe.ajouterEtudiant(e);
+        groupe.ajouterEtudiant(e1);
+        groupe.ajouterEtudiant(e2);
+
+        double mm = groupe.calculerMoyenneMatiere("algo");
+        double moy = e.calculerMoyenne("algo");
+        moy += e2.calculerMoyenne("algo");
+        assertEquals(moy/2, mm);
+    }
+
+    @Test
+    public void testMoyenneGenerale(){
+        groupe.ajouterEtudiant(e);
+        groupe.ajouterEtudiant(e1);
+        groupe.ajouterEtudiant(e2);
+
+        double mg = groupe.calculerMoyenneGenerale();
+        // Comme la classe TestEtudiant a été vérifiée, on peut utiliser les méthodes de la classe Etudiant
+        double moyg = e.calculerMoyenneGenerale() + e1.calculerMoyenneGenerale() + e2.calculerMoyenneGenerale();
+        assertEquals(moyg/3, mg);
     }
 }
