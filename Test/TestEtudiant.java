@@ -1,12 +1,9 @@
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
-import java.text.Normalizer;
-
 import static org.junit.jupiter.api.Assertions.*;
 
 public class TestEtudiant {
-    //Attributs
+    //Initialisation des attributs
 
     private Identite identite = new Identite("1234", "LEPAGE", "Thomas");
     private Identite idd2 = new Identite("1244", "DEFLOU-CARON", "Maxime");
@@ -42,6 +39,7 @@ public class TestEtudiant {
     //Test l'ajout d'une note dans une matière existante.
     @Test
     public void testAjoutNote(){
+        //La matière "Cryptographie" est dans les matières de la formation
         etu1.ajoutNote(cryptographie, 16.0);
         assertEquals(16.0, etu1.getResultat(cryptographie).getFirst());
     }
@@ -51,7 +49,7 @@ public class TestEtudiant {
     public void testAjoutNoteMatiereInexistante(){
         etu1.ajoutNote(anglais, 20.0);
         assertEquals(20.0, etu1.getResultat(anglais).getFirst());
-        //Quand la matière n'existe pas la matière est ajoutée
+        //Quand la matière n'existe pas, la matière est ajoutée.
     }
 
     //Test l'ajout d'une note négative.
@@ -59,6 +57,8 @@ public class TestEtudiant {
     public void testAjoutNoteNegative(){
         boolean ex = false;
         try{
+            //Une exception est levée car la note n'est pas
+            //comprise entre 0.0 et 20.0.
             etu1.ajoutNote(anglais, -2);
 
         }catch (NoteException e){
@@ -74,6 +74,8 @@ public class TestEtudiant {
     public void testAjoutNoteSupVingt(){
         boolean ex = false;
         try{
+            //Une exception est levée car la note n'est pas
+            //comprise entre 0.0 et 20.0.
             etu1.ajoutNote(anglais, 22);
         }
         catch (NoteException e){
@@ -117,6 +119,8 @@ public class TestEtudiant {
         Etudiant etu3 = new Etudiant(id3, f3);
         etu3.ajoutNote(anglais, 10);
 
+        //La matière où aucune note n'a été ajouté ne pénalise pas la
+        //moyenne générale de l'étudiant
         assertEquals(10, etu3.calculerMoyenneGenerale());
     }
 }

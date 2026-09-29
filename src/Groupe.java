@@ -83,9 +83,6 @@ public class Groupe {
         Collections.sort(this.liste, new TriAntiAlpha());
     }
 
-    public void triMerite(){
-
-    }
 
 
 
