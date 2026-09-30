@@ -87,4 +87,49 @@ public class TestTris {
             System.out.println(e.getIdentite().getNom() + " " + e.getIdentite().getPrenom());
         }
     }
+
+    //Test de la méthode triParMerite
+    @Test
+    public void testTriParMerite(){
+        //web
+        //reseau
+        //algo
+
+        for(Etudiant e : groupe.getListe()){
+            System.out.println(e.calculerMoyenneGenerale());
+        }
+
+        e.ajoutNote("web", 10);
+        e.ajoutNote("web", 12);
+        e.ajoutNote("reseau", 10);
+        e.ajoutNote("reseau", 12);
+        e.ajoutNote("algo", 10);
+        e.ajoutNote("algo", 12);
+
+        e1.ajoutNote("web", 10);
+        e1.ajoutNote("web", 14);
+        e1.ajoutNote("reseau", 10);
+        e1.ajoutNote("reseau", 14);
+        e1.ajoutNote("algo", 10);
+        e1.ajoutNote("algo", 14);
+
+        e2.ajoutNote("web", 8);
+        e2.ajoutNote("web", 12);
+        e2.ajoutNote("reseau", 8);
+        e2.ajoutNote("reseau", 12);
+        e2.ajoutNote("algo", 8);
+        e2.ajoutNote("algo", 12);
+
+        groupe.triParMerite();
+
+        for(Etudiant e : groupe.getListe()){
+            System.out.println(e.calculerMoyenneGenerale());
+        }
+
+        assertEquals(0, groupe.getIndexEtudiant(e2));
+        assertEquals(1, groupe.getIndexEtudiant(e));
+        assertEquals(2, groupe.getIndexEtudiant(e1));
+    }
+    //On estime avoir fait tous les tests pour la méthode triParMerite
+    //Tester autre chose reviendrait à tester les autres méthodes déjà testées.
 }
